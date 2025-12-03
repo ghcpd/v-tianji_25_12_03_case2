@@ -1,0 +1,23 @@
+.order-tracking-page {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.order-page-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #2c3e50;
+}
+
+.order-loading,
+.order-error {
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.order-error {
+  color: #e74c3c;
+}
+
