@@ -14,7 +14,7 @@ class Dashboard extends Component {
     };
   }
 
-  UNSAFE_componentWillMount() {
+  componentDidMount() {
     this.fetchDashboardData();
   }
 

@@ -18,9 +18,9 @@ class Analytics extends Component {
     this.fetchAnalytics();
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    if (nextState.timeRange !== this.state.timeRange) {
-      console.log('Time range will change');
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.timeRange !== this.state.timeRange) {
+      console.log('Time range changed');
     }
   }
 
