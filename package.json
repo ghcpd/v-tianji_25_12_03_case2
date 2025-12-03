@@ -1,33 +1,54 @@
 {
-  "name": "collaboration-test-app",
+  "name": "legacy-ecommerce-dashboard",
   "version": "1.0.0",
-  "description": "Frontend application for testing collaboration scenarios",
-  "private": true,
+  "description": "E-commerce dashboard with outdated dependencies requiring upgrades",
+  "main": "index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+    "start": "webpack-dev-server --mode development --open",
+    "build": "webpack --mode production",
+    "test": "jest",
+    "lint": "eslint src/"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.20.0",
-    "axios": "^1.6.2",
-    "zustand": "^4.4.7",
-    "date-fns": "^2.30.0"
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
+    "react-router-dom": "^5.2.0",
+    "axios": "^0.19.2",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
+    "redux": "^4.0.1",
+    "react-redux": "^7.1.0",
+    "redux-thunk": "^2.3.0",
+    "classnames": "^2.2.6",
+    "prop-types": "^15.7.2",
+    "node-sass": "^4.14.1",
+    "core-js": "^2.6.11"
   },
   "devDependencies": {
-    "@types/react": "^18.2.43",
-    "@types/react-dom": "^18.2.17",
-    "@typescript-eslint/eslint-plugin": "^6.14.0",
-    "@typescript-eslint/parser": "^6.14.0",
-    "@vitejs/plugin-react": "^4.2.1",
-    "eslint": "^8.55.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.5",
-    "typescript": "^5.2.2",
-    "vite": "^5.0.8"
-  }
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.35.0",
+    "webpack-cli": "^3.3.5",
+    "webpack-dev-server": "^3.7.2",
+    "css-loader": "^3.0.0",
+    "style-loader": "^0.23.1",
+    "sass-loader": "^7.1.0",
+    "html-webpack-plugin": "^3.2.0",
+    "eslint": "^6.1.0",
+    "eslint-plugin-react": "^7.14.2",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "jest": "^24.8.0",
+    "@testing-library/react": "^9.1.3",
+    "babel-jest": "^24.8.0"
+  },
+  "keywords": [
+    "react",
+    "dashboard",
+    "ecommerce",
+    "legacy"
+  ],
+  "author": "Development Team",
+  "license": "MIT"
 }
-
