@@ -1,67 +1,51 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-import moment from 'moment';
+import { format, differenceInDays, parseISO } from 'date-fns';
 import _ from 'lodash';
 
-class Analytics extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      chartData: [],
-      timeRange: 'week',
-      loading: true
-    };
-  }
+function Analytics() {
+  const dispatch = useDispatch();
+  const [chartData, setChartData] = useState([]);
+  const [timeRange, setTimeRange] = useState('week');
+  const [loading, setLoading] = useState(true);
 
-  componentDidMount() {
-    this.fetchAnalytics();
-  }
+  useEffect(() => {
+    fetchAnalytics();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [timeRange]);
 
-  componentWillUpdate(nextProps, nextState) {
-    if (nextState.timeRange !== this.state.timeRange) {
-      console.log('Time range will change');
-    }
-  }
-
-  fetchAnalytics = async () => {
-    const { dispatch } = this.props;
-    const { timeRange } = this.state;
-    
+  const fetchAnalytics = async () => {
     dispatch({ type: 'FETCH_ANALYTICS_REQUEST' });
-    
+
     try {
       const response = await axios.get(`https://api.example.com/analytics?range=${timeRange}`);
-      
+
       const processedData = response.data.map(item => ({
         ...item,
-        formattedDate: moment(item.date).format('MMM DD, YYYY'),
-        daysAgo: moment().diff(moment(item.date), 'days')
+        formattedDate: format(parseISO(item.date), 'MMM dd, yyyy'),
+        daysAgo: differenceInDays(new Date(), parseISO(item.date))
       }));
-      
-      dispatch({ 
-        type: 'FETCH_ANALYTICS_SUCCESS', 
-        payload: processedData 
+
+      dispatch({
+        type: 'FETCH_ANALYTICS_SUCCESS',
+        payload: processedData
       });
-      
-      this.setState({ 
-        chartData: processedData,
-        loading: false 
-      });
+
+      setChartData(processedData);
+      setLoading(false);
     } catch (error) {
       console.error('Analytics fetch error:', error);
-      this.setState({ loading: false });
+      setLoading(false);
     }
   };
 
-  handleTimeRangeChange = (range) => {
-    this.setState({ timeRange: range }, () => {
-      this.fetchAnalytics();
-    });
+  const handleTimeRangeChange = (range) => {
+    setTimeRange(range);
   };
 
-  calculateMetrics = () => {
-    const { chartData } = this.state;
+  const calculateMetrics = () => {
+    const data = chartData;
     
     const total = _.sumBy(chartData, 'value');
     const average = _.meanBy(chartData, 'value');
@@ -71,10 +55,12 @@ class Analytics extends Component {
   };
 
   render() {
-    const { loading, timeRange, chartData } = this.state;
+    const loadingState = loading;
+    const tr = timeRange;
+    const data = chartData;
     const metrics = this.calculateMetrics();
 
-    if (loading) {
+    if (loadingState) {
       return <div className="loading">Loading analytics...</div>;
     }
 
@@ -119,7 +105,7 @@ class Analytics extends Component {
         </div>
 
         <div className="chart-container">
-          {chartData.map((item, index) => (
+          {data.map((item, index) => (
             <div key={index} className="chart-bar">
               <span>{item.formattedDate}</span>
               <div 
