@@ -35,3 +35,14 @@ Code Modifications Required
 • Include configuration file updates (webpack, babel, jest, etc.)
 
 Expected Deliverables
+Please provide:
+• A detailed document with all findings
+• Specific version numbers for all upgrade recommendations
+• Code examples for critical migrations
+• A priority matrix (High/Medium/Low for urgency)
+• Estimated timeline for the complete upgrade process
+
+Title: Comprehensive Dependency Upgrade and Migration Analysis
+
+Description:
+This task requires a full dependency upgrade assessment for the provided project. The system must analyze outdated dependencies, security issues, breaking changes, deprecated APIs, and required migration steps. The final output should include a complete upgrade plan, code modifications, priority assessments, and an estimated execution timeline.
