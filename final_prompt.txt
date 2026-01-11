@@ -1,0 +1,48 @@
+Prompt
+
+Your Task
+
+Please analyze this project and provide a comprehensive dependency upgrade plan. Specifically:
+
+Identify all dependencies that need to be upgraded
+• List each outdated package with current and recommended versions
+• Prioritize by severity (security vulnerabilities, deprecated packages, minor updates)
+
+Security Analysis
+• Identify any known security vulnerabilities (CVEs) in the current dependencies
+• Assess the risk level for each vulnerability
+• Recommend immediate actions for critical security issues
+
+Breaking Changes Assessment
+• For each major version upgrade, document the breaking changes
+• Identify which files in the codebase will be affected
+• Provide code migration examples for the most significant changes
+
+Deprecated API Detection
+• Scan the codebase for usage of deprecated APIs
+• List all deprecated methods/functions being used
+• Suggest modern alternatives with code examples
+
+Migration Strategy
+• Create a step-by-step upgrade plan
+• Estimate the effort required for each upgrade
+• Suggest the order of upgrades (considering dependencies between packages)
+• Provide a risk mitigation strategy
+
+Code Modifications Required
+• Generate specific code diffs showing before and after for key changes
+• Cover at least 3–5 major code refactoring areas
+• Include configuration file updates (webpack, babel, jest, etc.)
+
+Expected Deliverables
+Please provide:
+• A detailed document with all findings
+• Specific version numbers for all upgrade recommendations
+• Code examples for critical migrations
+• A priority matrix (High/Medium/Low for urgency)
+• Estimated timeline for the complete upgrade process
+
+Title: Comprehensive Dependency Upgrade and Migration Analysis
+
+Description:
+This task requires a full dependency upgrade assessment for the provided project. The system must analyze outdated dependencies, security issues, breaking changes, deprecated APIs, and required migration steps. The final output should include a complete upgrade plan, code modifications, priority assessments, and an estimated execution timeline.
