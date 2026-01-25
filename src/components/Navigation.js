@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
+import { format } from 'date-fns';
 
 function Navigation() {
-  const currentTime = moment().format('HH:mm:ss');
+  const currentTime = format(new Date(), 'HH:mm:ss');
 
   return (
     <nav className="navigation">

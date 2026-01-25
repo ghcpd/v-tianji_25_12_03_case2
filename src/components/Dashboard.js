@@ -1,46 +1,46 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import moment from 'moment';
 import _ from 'lodash';
 import classNames from 'classnames';
 
-class Dashboard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      stats: {},
-      loading: true
-    };
-  }
+function Dashboard(props) {
+  const [stats, setStats] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [lastUpdated, setLastUpdated] = useState(null);
 
-  UNSAFE_componentWillMount() {
-    this.fetchDashboardData();
-  }
-
-  fetchDashboardData = async () => {
+  const fetchDashboardData = async () => {
     try {
       const response = await axios.get('https://api.example.com/dashboard/stats');
       
-      const formattedDate = moment().format('MMMM Do YYYY, h:mm:ss a');
-      
-      this.setState({
-        stats: response.data,
-        loading: false,
-        lastUpdated: formattedDate
-      });
+      const formattedDate = new Date();
+
+      setStats(response.data);
+      setLoading(false);
+      setLastUpdated(formattedDate);
     } catch (error) {
       console.error('Error fetching dashboard data:', error);
-      this.setState({ loading: false });
+      setLoading(false);
     }
   };
 
-  handleSearch = _.debounce((value) => {
-    console.log('Searching for:', value);
-  }, 300);
+  useEffect(() => {
+    fetchDashboardData();
+  }, []);
 
-  render() {
-    const { loading, stats } = this.state;
+  const handleSearch = useCallback(
+    _.debounce((value) => {
+      console.log('Searching for:', value);
+    }, 300),
+    []
+  );
+
+  // render
+    // keep compatibility with previous structure
+    // lastUpdated is a Date instance saved in state
+    // formatted display will happen inside render
+    // eslint-disable-next-line no-unused-vars
+    // keep stats/loading from hooks
     
     const containerClass = classNames({
       'dashboard-container': true,
@@ -66,12 +66,11 @@ class Dashboard extends Component {
           </div>
           <div className="stat-card">
             <h3>Last Updated</h3>
-            <p>{this.state.lastUpdated}</p>
+              <p>{lastUpdated ? lastUpdated.toString() : ''}</p>
           </div>
         </div>
       </div>
     );
-  }
 }
 
 const mapStateToProps = (state) => ({
